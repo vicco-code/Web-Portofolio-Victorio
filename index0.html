@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Victorio | Web & Creative</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-purple: #a78bfa;
+            --accent-pink: #f472b6;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth; /* Halaman scroll halus */
+        }
+
+        /* 1. Navigasi Modern dengan Efek Cahaya */
+        .navbar {
+            background: rgba(15, 23, 42, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar-brand {
+            color: var(--accent-blue) !important;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+        }
+
+        .nav-link {
+            color: #e2e8f0 !important;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        /* Efek Glow saat Hover */
+        .nav-link:hover {
+            color: var(--accent-blue) !important;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.8),
+                         0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Garis bawah bercahaya saat hover */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-blue);
+            box-shadow: 0 0 10px var(--accent-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent);
+        }
+
+        .hero h1 {
+            font-weight: 800;
+            font-size: 3.5rem;
+        }
+
+        .hero span {
+            color: var(--accent-blue);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+        }
+
+        /* About Section */
+        .about-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .about-img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 15px;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--card-bg);
+            border: none;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .title-blue { color: var(--accent-blue); }
+        .title-purple { color: var(--accent-purple); }
+        .title-pink { color: var(--accent-pink); }
+
+        .btn-custom {
+            background: linear-gradient(135deg, var(--accent-blue), #0ea5e9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* 2. Tombol Kembali ke Atas (Back to Top) */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-blue), #0ea5e9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0; /* Tersembunyi di awal */
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        #backToTop:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.6);
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">VICTORIO.</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#project">Project</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="hero text-center">
+    <div class="container">
+        <h1 class="mb-3">Halo, saya <span>Victorio Pelletimu</span> 👋</h1>
+        <p class="lead text-secondary mx-auto" style="max-width: 600px;">
+            Mahasiswa Ilmu Komputer yang berfokus pada perpaduan estetika desain dan fungsionalitas web development.
+        </p>
+    </div>
+</section>
+
+<section id="about" class="py-5">
+    <div class="container">
+        <div class="about-card p-4 p-md-5">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <img src="ftogamtenkrio.jpeg" class="about-img" alt="Victorio">
+                </div>
+                <div class="col-md-8">
+                    <h6 class="text-uppercase tracking-widest text-info mb-2">Kenalan Yuk</h6>
+                    <h2 class="mb-4">Tentang Saya</h2>
+                    <p class="text-secondary">
+                        Saya adalah mahasiswa Ilmu Komputer Universitas Pattimura yang antusias dalam bidang 
+                        <strong>desain, pemrograman web, dan videografi</strong>. Sejak kecil saya gemar menggambar, 
+                        sebuah hobi yang kini saya transformasikan ke dalam bentuk visual digital.
+                    </p>
+                    <p class="text-secondary">
+                        Selain hobi menggambar, saya menikmati eksplorasi film dan game sebagai sumber inspirasi kreatif. 
+                        Saat ini, saya terus mengasah <em>skill</em> teknis saya untuk menciptakan solusi digital yang berdampak luas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="project" class="py-5">
+    <div class="container">
+        <div class="mb-5">
+            <h6 class="text-info">SHOWCASE</h6>
+            <h2 class="fw-bold">Project Pilihan 👾</h2>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card p-4 shadow-sm">
+                    <h3 class="title-blue h5 fw-bold mb-3">Website ViccoArt</h3>
+                    <p class="text-secondary small">
+                        Eksplorasi seni visual melalui platform web sederhana untuk menampilkan karya ilustrasi saya.
+                    </p>
+                    <div class="mb-3">
+                        <span class="badge bg-dark text-info border border-info">WordPress</span>
+                    </div>
+                    <a href="https://anestho08-iybch.wordpress.com/" target="_blank" class="btn btn-sm btn-custom">Kunjungi Situs</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card p-4 shadow-sm">
+                    <h3 class="title-purple h5 fw-bold mb-3">Book of Memory 2024</h3>
+                    <p class="text-secondary small">
+                        Kompilasi sinematik momen berharga sepanjang 2024 dengan sentuhan editing kreatif.
+                    </p>
+                    <div class="mb-3">
+                        <span class="badge bg-dark text-info border border-info">Videography</span>
+                    </div>
+                    <a href="https://www.instagram.com/reel/DEPzIjbT1sM/" target="_blank" class="btn btn-sm btn-custom">Tonton Reel</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="project-card p-4 shadow-sm">
+                    <h3 class="title-pink h5 fw-bold mb-3">Cinematic Highlights</h3>
+                    <p class="text-secondary small">
+                        Kumpulan cuplikan video pendek yang menangkap keindahan visual di sekitar saya.
+                    </p>
+                    <div class="mb-3">
+                        <span class="badge bg-dark text-info border border-info">Instagram Highlights</span>
+                    </div>
+                    <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQzOTUxNzM4OTk3NDM2" target="_blank" class="btn btn-sm btn-custom">Lihat Koleksi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Mari Terhubung</h2>
+            <p class="text-secondary">Punya ide proyek atau sekadar ingin menyapa?</p>
+        </div>
+        <div class="row justify-content-center text-center">
+            <div class="col-md-4 mb-4">
+                <div class="p-4 border rounded border-secondary border-opacity-25 h-100">
+                    <small class="d-block text-secondary mb-2">Email</small>
+                    <a href="mailto:anestho08@gmail.com" class="text-white text-decoration-none fw-bold">anestho08@gmail.com</a>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-4 border rounded border-secondary border-opacity-25 h-100">
+                    <small class="d-block text-secondary mb-2">Instagram</small>
+                    <a href="https://instagram.com/Khen_artt" target="_blank" class="text-white text-decoration-none fw-bold">@Khen_artt</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<button id="backToTop" title="Kembali ke Atas">↑</button>
+
+<footer class="text-center text-secondary">
+    <div class="container">
+        <p class="mb-1">© 2026 Victorio Pelletimu</p>
+        <p class="small">Built with ❤️ & Bootstrap 5 | Ilmu Komputer UNPATTI</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const backToTopBtn = document.getElementById('backToTop');
+
+    // Tampilkan tombol saat scroll ke bawah
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) { // Timbul setelah scroll 300px
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    // Fungsi Scroll ke Atas saat ditekan
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+</script>
+
+</body>
+</html>
